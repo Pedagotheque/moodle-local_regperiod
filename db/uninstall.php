@@ -1,0 +1,58 @@
+<?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * @package    local_regperiod
+ * @copyright  IMT Lille Douai <https://imt-lille-douai.fr>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @author     Romain DELEAU
+ */
+
+defined('MOODLE_INTERNAL') || die();
+
+function xmldb_local_regperiod_uninstall() {
+    global $CFG, $DB;
+
+    // Delete all the reference to the start and end fields
+    $startfieldid = ($DB->get_record('user_info_field', array('shortname' => 'startreg'), 'id', IGNORE_MISSING))->id;
+    $endfieldid = ($DB->get_record('user_info_field', array('shortname' => 'endreg'), 'id', IGNORE_MISSING))->id;
+    $DB->delete_records('user_info_data', array('fieldid' => $startfieldid));
+    $DB->delete_records('user_info_data', array('fieldid' => $endfieldid));
+
+    // Delete the start and end fields
+    $DB->delete_records('user_info_field', array('shortname' => 'startreg'));
+    $DB->delete_records('user_info_field', array('shortname' => 'endreg'));
+
+    // Delete the regperiod category
+    $DB->delete_records('user_info_category', array('name' => 'Registration duration to the site'));
+
+    // Re-order the others categorys
+    $categorys = $DB->get_records(
+        'user_info_category',
+        null,
+        null,
+        '*',
+        null,
+        null
+    );
+    foreach ($categorys as $category) {
+        $update = new stdClass();
+        $update->id = $category->id;
+        $update->sortorder = ($category->sortorder) - 1;
+        $DB->update_record('user_info_category', $update);
+    }
+
+}
