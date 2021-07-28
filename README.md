@@ -1,9 +1,10 @@
 # Description
-This plugin allow you to choose a starting and ending date for the registration of your users by using the profilefields.
-At the installation the plugin will create a new profilefield category called "Registration duration to the site" with the fields "Start" and "End" inside.
-The category will be placed in the first position of categories.
-The new category can be renamed or remove if you want and the fields too (If you remove the two fields the plugin become useless of course but you can remove one of them if needed).
-You can personnalise the two fields like you want but don't modify the shortname, without this the field can't be recognized by the plugin and become useless.
+This plugin allows you to set start and end dates of registration, via the user profile fields.
+During the installation, the plugin will create a new profile field category called "Registration duration to the site" with the fields "Start" and "End".
+The category will be at the top of all existing categories.
+The new category can be renamed or removed, and so are the fields (if you remove both of the fields, the plugin becomes useless, but you can remove one of them if needed).
+You can customise the two fields, except for the short names. Indeed, the short names are required for the plugin to work.
+If you need to upload users through a CSV file, the start and end dates should be in the UNIX timestamp format (you can use this converter:  https://www.unixtimestamp.com/).
 
 # Functioning
-A task, by default parametrate to be run every 10minutes (editable in the task params), suspend or unsuspend the users who must be.
+A scheduled task is set to be run every 10 minutes in order to suspend or activate relevant users. This task can be edited in the site administration.
