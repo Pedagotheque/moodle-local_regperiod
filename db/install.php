@@ -15,27 +15,31 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Local regperiod plugin install script.
+ *
  * @package    local_regperiod
  * @copyright  IMT Lille Douai <https://imt-lille-douai.fr>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @author     Romain DELEAU
  */
 
-defined('MOODLE_INTERNAL') || die();
-
+/**
+ * A function to install local_regperiod plugin into the current database.
+ *
+ * @return void
+ * @throws dml_exception
+ */
 function xmldb_local_regperiod_install() {
-    global $CFG, $DB;
+    global $DB;
 
-    // Create the regperiod category if not exist
+    // Create the regperiod category if not exist.
     $categoryexist = $DB->get_record(
         'user_info_category',
-        array('name' => 'Registration duration to the site'),
-        '*',
-        IGNORE_MISSING
+        array('name' => 'Registration duration to the site')
     );
     if (empty($categoryexist)) {
 
-        // Down all the others categorys to put this one first
+        // Down all the others categorys to put this one first.
         $categorys = $DB->get_records(
             'user_info_category',
             null,
@@ -51,7 +55,7 @@ function xmldb_local_regperiod_install() {
             $DB->update_record('user_info_category', $update);
         }
 
-        // Create the regperiod category
+        // Create the regperiod category.
         $newcategory = new stdClass();
         $newcategory->name = 'Registration duration to the site';
         $newcategory->sortorder = 1;
@@ -61,80 +65,68 @@ function xmldb_local_regperiod_install() {
         );
     }
 
-    // Create the fields in the regperiod category if not exists
+    // Create the fields in the regperiod category if not exists.
     $categoryid = ($DB->get_record(
         'user_info_category',
         array('name' => 'Registration duration to the site'),
-        'id', IGNORE_MISSING
+        'id'
     ))->id;
     $fieldstartexist = $DB->get_record(
         'user_info_field',
-        array('categoryid' => $categoryid, 'shortname' => 'startreg'),
-        '*',
-        IGNORE_MISSING
+        array('categoryid' => $categoryid, 'shortname' => 'startreg')
     );
     $fieldendexist = $DB->get_record(
         'user_info_field',
-        array('categoryid' => $categoryid, 'shortname' => 'endreg'),
-        '*',
-        IGNORE_MISSING
+        array('categoryid' => $categoryid, 'shortname' => 'endreg')
     );
 
-    // If the start field not exist, create it
+    // If the start field not exist, create it.
     if (empty($fieldstartexist)) {
-        $startfield = new stdClass();
-        $startfield->shortname = 'startreg';
-        $startfield->name = 'Start';
-        $startfield->datatype = 'datetime';
-        $startfield->description = '';
-        $startfield->descriptionformat = 1;
-        $startfield->categoryid = $categoryid;
-        $startfield->sortorder = 1;
-        $startfield->required = 0;
-        $startfield->locked = 1;
-        $startfield->visible = 2;
-        $startfield->forceunique = 0;
-        $startfield->signup = 1;
-        $startfield->defaultdata = 0;
-        $startfield->defaultdataformat = 0;
-        $startfield->param1 = 2020;
-        $startfield->param2 = 2050;
-        $startfield->param3 = 1;
-        $startfield->param4 = null;
-        $startfield->param5 = null;
-
-        $DB->insert_record(
-            'user_info_field',
-            $startfield
-        );
+        create_registration_field('Start', 'startreg', $categoryid, 1);
     }
 
-    // If the end field not exist, create it
+    // If the end field not exist, create it.
     if (empty($fieldendexist)) {
-        $endfield = new stdClass();
-        $endfield->shortname = 'endreg';
-        $endfield->name = 'End';
-        $endfield->datatype = 'datetime';
-        $endfield->description = '';
-        $endfield->descriptionformat = 1;
-        $endfield->categoryid = $categoryid;
-        $endfield->sortorder = 2;
-        $endfield->required = 0;
-        $endfield->locked = 1;
-        $endfield->visible = 2;
-        $endfield->forceunique = 0;
-        $endfield->signup = 1;
-        $endfield->defaultdata = 0;
-        $endfield->defaultdataformat = 0;
-        $endfield->param1 = 2020;
-        $endfield->param2 = 2050;
-        $endfield->param3 = 1;
-        $endfield->param4 = null;
-        $endfield->param5 = null;
-
-        $DB->insert_record(
-            'user_info_field',
-            $endfield
-        );
+        create_registration_field('End', 'endreg', $categoryid, 2);
     }
+}
+
+/**
+ * A function to create a registration field.
+ * It has been implemented to avoid having long duplicated code fragments in {@see xmldb_local_regperiod_install()}
+ *
+ * @param string $name The name of the field.
+ * @param string $shortname The shortname of the field.
+ * @param string $categoryid The category's id of the field.
+ * @param int $sortorder The sort order of the field.
+ * @return void
+ */
+function create_registration_field($name, $shortname, $categoryid, $sortorder) {
+    global $DB;
+
+    $field = new stdClass();
+    $field->shortname = $shortname;
+    $field->name = $name;
+    $field->datatype = 'datetime';
+    $field->description = '';
+    $field->descriptionformat = 1;
+    $field->categoryid = $categoryid;
+    $field->sortorder = $sortorder;
+    $field->required = 0;
+    $field->locked = 1;
+    $field->visible = 2;
+    $field->forceunique = 0;
+    $field->signup = 1;
+    $field->defaultdata = 0;
+    $field->defaultdataformat = 0;
+    $field->param1 = 2020;
+    $field->param2 = 2050;
+    $field->param3 = 1;
+    $field->param4 = null;
+    $field->param5 = null;
+
+    $DB->insert_record(
+        'user_info_field',
+        $field
+    );
 }

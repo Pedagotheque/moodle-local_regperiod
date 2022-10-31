@@ -15,31 +15,37 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Local regperiod plugin uninstall script.
+ *
  * @package    local_regperiod
  * @copyright  IMT Lille Douai <https://imt-lille-douai.fr>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @author     Romain DELEAU
  */
 
-defined('MOODLE_INTERNAL') || die();
 
+/**
+ * A function to uninstall the plugin from the current database where it is alreeady installed.
+ *
+ * @return void
+ */
 function xmldb_local_regperiod_uninstall() {
-    global $CFG, $DB;
+    global $DB;
 
-    // Delete all the reference to the start and end fields
-    $startfieldid = ($DB->get_record('user_info_field', array('shortname' => 'startreg'), 'id', IGNORE_MISSING))->id;
-    $endfieldid = ($DB->get_record('user_info_field', array('shortname' => 'endreg'), 'id', IGNORE_MISSING))->id;
+    // Delete all the reference to the start and end fields.
+    $startfieldid = ($DB->get_record('user_info_field', array('shortname' => 'startreg'), 'id'))->id;
+    $endfieldid = ($DB->get_record('user_info_field', array('shortname' => 'endreg'), 'id'))->id;
     $DB->delete_records('user_info_data', array('fieldid' => $startfieldid));
     $DB->delete_records('user_info_data', array('fieldid' => $endfieldid));
 
-    // Delete the start and end fields
+    // Delete the start and end fields.
     $DB->delete_records('user_info_field', array('shortname' => 'startreg'));
     $DB->delete_records('user_info_field', array('shortname' => 'endreg'));
 
-    // Delete the regperiod category
+    // Delete the regperiod category.
     $DB->delete_records('user_info_category', array('name' => 'Registration duration to the site'));
 
-    // Re-order the others categorys
+    // Re-order the others categorys.
     $categorys = $DB->get_records(
         'user_info_category',
         null,
