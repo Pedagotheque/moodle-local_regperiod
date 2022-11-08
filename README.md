@@ -1,4 +1,4 @@
-[![Moodle Plugin CI](https://github.com/martin-call-learning/moodle-local_regperiod/actions/workflows/main.yml/badge.svg)](https://github.com/martin-call-learning/moodle-local_regperiod/actions/workflows/main.yml)
+[![Moodle Plugin CI](https://github.com/Pedagotheque/moodle-local_regperiod/actions/workflows/main.yml/badge.svg)](https://github.com/Pedagotheque/moodle-local_regperiod/actions/workflows/main.yml)
 
 # Description
 This plugin allows you to set start and end dates of registration via two user profile fields.

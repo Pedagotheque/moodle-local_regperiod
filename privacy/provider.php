@@ -22,7 +22,7 @@ use core_privacy\local\metadata\null_provider;
  * Privacy provider class.
  *
  * @package     local_regperiod
- * @copyright   2022 - CALL Learning - Martin CORNU-MANSUY <martin@call-learning>
+ * @copyright  IMT Lille Douai <https://imt-lille-douai.fr>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @author      Martin CORNU-MANSUY
  */
@@ -31,7 +31,7 @@ use core_privacy\local\metadata\null_provider;
  * Privacy provider class for the pugin local_regperiod.
  *
  * @package     local_regperiod
- * @copyright   2022 - CALL Learning - Martin CORNU-MANSUY <martin@call-learning>
+ * @copyright  IMT Lille Douai <https://imt-lille-douai.fr>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @author      Martin CORNU-MANSUY
  */
