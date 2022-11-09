@@ -14,7 +14,7 @@ If you need to upload users through a CSV file, the start and end dates should b
 
 During the installation, the plugin will create a new profile field category called "Registration duration" to the site with the fields "Start" and "End".
 
-The category will be at the top of all existing categories.
+The category will be at the bottom of all existing categories.
 The new category can be renamed or removed, and so are the fields
 >*If you remove both of the fields, the plugin becomes useless, but you can remove one of them if needed.*
 
