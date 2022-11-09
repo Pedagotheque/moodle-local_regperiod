@@ -1,7 +1,9 @@
 [![Moodle Plugin CI](https://github.com/Pedagotheque/moodle-local_regperiod/actions/workflows/main.yml/badge.svg)](https://github.com/Pedagotheque/moodle-local_regperiod/actions/workflows/main.yml)
 
 # Description
-This plugin allows you to set start and end dates of registration via two user profile fields.
+
+
+This plugin allows you to set start and end dates for user activation, via their user profile field. When we specify a start date or end date on a given user profile, the user is suspended when the date is out of range.
 
 You can customise the two fields with all the properties you like.
 >*Except for the short names. Indeed, **the short names are required for the plugin to work***.
