@@ -15,13 +15,15 @@
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
 /**
+ * Version file for local_regperiod plugin
+ *
  * @package    local_regperiod
  * @copyright  IMT Lille Douai <https://imt-lille-douai.fr>
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @author     Romain DELEAU
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @author      Martin CORNU-MANSUY <martin@call-learning>
  */
 
 defined('MOODLE_INTERNAL') || die;
 
 $plugin->component = 'local_regperiod';
-$plugin->version = 2021072700;
+$plugin->version = 2022110801;

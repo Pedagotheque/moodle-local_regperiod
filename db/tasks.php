@@ -15,6 +15,8 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Defines whenever the checktask task will be running.
+ *
  * @package    local_regperiod
  * @copyright  IMT Lille Douai <https://imt-lille-douai.fr>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
