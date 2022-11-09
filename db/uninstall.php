@@ -44,21 +44,4 @@ function xmldb_local_regperiod_uninstall() {
 
     // Delete the regperiod category.
     $DB->delete_records('user_info_category', array('name' => 'Registration duration to the site'));
-
-    // Re-order the others categorys.
-    $categorys = $DB->get_records(
-        'user_info_category',
-        null,
-        null,
-        '*',
-        null,
-        null
-    );
-    foreach ($categorys as $category) {
-        $update = new stdClass();
-        $update->id = $category->id;
-        $update->sortorder = ($category->sortorder) - 1;
-        $DB->update_record('user_info_category', $update);
-    }
-
 }

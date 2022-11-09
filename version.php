@@ -26,4 +26,4 @@
 defined('MOODLE_INTERNAL') || die;
 
 $plugin->component = 'local_regperiod';
-$plugin->version = 2022110801;
+$plugin->version = 2022110902;

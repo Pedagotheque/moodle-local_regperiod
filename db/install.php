@@ -20,7 +20,7 @@
  * @package    local_regperiod
  * @copyright  IMT Lille Douai <https://imt-lille-douai.fr>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @author     Romain DELEAU
+ * @author     Martin CORNU-MANSUY <martin@call-learning>
  */
 
 /**
@@ -39,26 +39,10 @@ function xmldb_local_regperiod_install() {
     );
     if (empty($categoryexist)) {
 
-        // Down all the others categorys to put this one first.
-        $categorys = $DB->get_records(
-            'user_info_category',
-            null,
-            null,
-            '*',
-            null,
-            null
-        );
-        foreach ($categorys as $category) {
-            $update = new stdClass();
-            $update->id = $category->id;
-            $update->sortorder = ($category->sortorder) + 1;
-            $DB->update_record('user_info_category', $update);
-        }
-
         // Create the regperiod category.
         $newcategory = new stdClass();
         $newcategory->name = 'Registration duration to the site';
-        $newcategory->sortorder = 1;
+        $newcategory->sortorder = $DB->count_records('user_info_category') + 1;
         $DB->insert_record(
             'user_info_category',
             $newcategory
