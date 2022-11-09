@@ -20,7 +20,7 @@
  * @package   local_regperiod
  * @copyright  IMT Lille Douai <https://imt-lille-douai.fr>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @author      Martin CORNU-MANSUY
+ * @author      Martin CORNU-MANSUY <martin@call-learning>
  */
 
 namespace local_regperiod;
@@ -34,7 +34,7 @@ use local_regperiod\task\checktask;
  *
  * @copyright  IMT Lille Douai <https://imt-lille-douai.fr>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @author      Martin CORNU-MANSUY
+ * @author      Martin CORNU-MANSUY <martin@call-learning>
  */
 class checktask_test extends advanced_testcase {
 
@@ -133,7 +133,7 @@ class checktask_test extends advanced_testcase {
         $user = $this->create_users()[0];
         checktask::suspend_user($user->id, $suspended);
         $userdata = checktask::get_suspended_deleted($user->id);
-        self::assertEquals($suspended, $userdata->suspended);
+        self::assertEquals($suspended, (bool) $userdata->suspended);
     }
 
     /**

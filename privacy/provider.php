@@ -24,7 +24,7 @@ use core_privacy\local\metadata\null_provider;
  * @package     local_regperiod
  * @copyright  IMT Lille Douai <https://imt-lille-douai.fr>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @author      Martin CORNU-MANSUY
+ * @author      Martin CORNU-MANSUY <martin@call-learning>
  */
 
 /**
@@ -33,7 +33,7 @@ use core_privacy\local\metadata\null_provider;
  * @package     local_regperiod
  * @copyright  IMT Lille Douai <https://imt-lille-douai.fr>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @author      Martin CORNU-MANSUY
+ * @author      Martin CORNU-MANSUY <martin@call-learning>
  */
 class provider implements null_provider {
 
