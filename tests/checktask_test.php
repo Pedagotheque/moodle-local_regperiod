@@ -338,6 +338,4 @@ class checktask_test extends advanced_testcase {
         }
         return $createdusers;
     }
-
-
 }
